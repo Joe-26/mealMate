@@ -110,6 +110,9 @@ def newmeal_view(request):
                 endIndex = i
                 break
         json_response = json.loads(ai_response[startIndex:endIndex+1])
+
+        for i in range(3):
+            recipeDb.objects.create(recipeName=json_response["recipes"][i]["name"], calories=json_response["recipes"][i]["calories"], userName=request.user)
         
 
     return render(request, 'newmeal.html', {'yourRecipes':json_response})
