@@ -27,21 +27,23 @@
             <!-- Hidden input to store all ingredients as a comma-separated list -->
             <input type="hidden" name="ingredients" id="ingredientsData">
 
-            {% comment %}
             <div>
                 <label>Calories</label>
-                <input type="text"></input>
+                <input type="number" name="calorieCount"></input>
             </div>
             <div>
                 <label>Cusine</label>
-                <input type="text"></input>
+                <input type="text" name="cuisine"></input>
             </div>
-            {% endcomment %}
+            
             <button type="submit">Generate</button>
         </form>
 
         <div>
             <h3>Your Recipes :</h3>
+            {% if context %}
+                <div class="recepies">{{ context }} </div>
+            {% endif %}
         </div>
     </div>
 
