@@ -10,16 +10,37 @@
     %}">
   </head>
   <body>
+    <!-- HEADING -->
     <div>
       <h1>Log In</h1>
     </div>
 
+    <!-- FORM -->
     <div>
-      <a href="#">
-        <button type="submit">Log In</button>
-      </a>
-      &nbsp;
-      <p>Don't have an account? <a href="#">Register Here</a></p>
+      <form method="POST" action={% url "login" %}>
+        {% csrf_token %}
+          <div>
+            <label>Username: </label>
+            <input type="text" name="username" required></input>
+          </div>
+          <div>
+            <label>Password: </label>
+            <input type="password" name="password" required></input>
+          </div>
+          <button type="submit">Log In</button>
+      </form>
+      {% comment %} Checking for any errors messages {% endcomment %}
+      {% if error %}
+        <p class="error">{{ error }} </p>
+      {% endif %}
+    </div>
+
+    <div>
+      <p>Don't have an account? <a href={% url "register" %}>Register Here</a></p>
+    </div>
+    
+    <div>
+      <a href="{% url "landingpage" %}">&larr; Back to Home</a>
     </div>
   </body>
 </html>

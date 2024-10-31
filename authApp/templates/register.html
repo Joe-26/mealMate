@@ -15,9 +15,15 @@
     </div>
 
     <div>
-      <a href="#">
+      <form method="POST" action={% url "register" %}>
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Register</button>
-      </a>
+      </form>
+    </div>
+    
+    <div>
+      <a href="{% url "landingpage" %}">&larr; Back to Home</a>
     </div>
   </body>
 </html>
