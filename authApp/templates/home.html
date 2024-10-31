@@ -10,12 +10,26 @@
 </head>
 <body>
     <div>
-        <h2>Home</h2>
-        <p>Welcome, {{request.user.username}}!</p>
+        <h1>Welcome,&nbsp;{{request.user.username}}!</h1>
+        <p>Elevate your home cooking with our AI-powered recipe assistant.</p>
+        <div>
+            <h3>Your previous ingredients:</h3>
+            {% for ingredient in ingredients %}
+                <p>{{ ingredient.ingredientName }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Your previous recipes:</h3>
+            {% for recipe in recipes %}
+                <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
+            {% endfor %}
+        </div>
         <form method="POST" action="{% url "logout" %}">
             {% csrf_token %}
             <button type="submit">Log Out</button>
         </form>
+        <a href={% url "newmeal" %}>
+        <button>Make a new meal</button></a>
     </div>
 </body>
 </html>

@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.contrib.auth.models import User
 
-from .forms import RegisterForm
+from .forms import RegisterForm, IngredientForm
+from .models import ingredientDb, recipeDb
 
 # Landing Page View
 def landing_view(request):
@@ -30,11 +31,9 @@ def login_view(request):
     error_message = None
     if request.method == "POST":
         username = request.POST.get("username")
-        print('Username-', username)
         password = request.POST.get("password")
-        print('Password-', password)
         user = authenticate(request, username=username, password=password)
-        print('Check user -',user)
+        
         if user is not None:
             login(request, user)
             next_url = request.POST.get('next') or request.GET.get('next') or 'home'
@@ -56,13 +55,20 @@ def logout_view(request):
 # Using the decorator
 @login_required
 def home_view(request):
-    return render(request, 'home.html')
+    ingredients = ingredientDb.objects.all()
+    recipes = recipeDb.objects.all()
+    return render(request, 'home.html', {'ingredients':ingredients, 'recipes':recipes})
 
-# Protected View
-class ProtectedView(LoginRequiredMixin, View):
-    login_url = '/login/'
-    # 'next' - to redirect URL
-    redirect_field_name = 'redirect_to'
+@login_required
+def newmeal_view(request):
+    if request.method == "POST":
+        ingredients_data = request.POST.get('ingredients', '')
+        ingredients = ingredients_data.split(',')
+        for ingredient_name in ingredients:
+            if ingredient_name.strip():
+                ingredientDb.objects.create(
+                    ingredientName=ingredient_name.strip(),
+                    userName=request.user
+                )
 
-    def get(self, request):
-        return render(request, 'home.html')
+    return render(request, 'newmeal.html')

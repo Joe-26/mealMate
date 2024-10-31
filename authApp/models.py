@@ -12,4 +12,3 @@ class recipeDb(models.Model):
     userName = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recepies')
     recipeName = models.CharField(max_length=200)
     calories = models.IntegerField()
-    

@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Mate</title>
+    <link rel='stylesheet' type="text/css" href=" {% static "styles/styles.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Add New Meal</h1>
+        <p>Cook smarter, not harder.</p>
+
+        <a href={% url "home" %}>&larr; Home</a>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div>
+                <label for="ingredientInput">Ingredient</label>
+                <input type="text" id="ingredientInput" placeholder="Ingredient">
+                <ul id="ingredientList"></ul> <!-- List to stack ingredients -->
+            </div>
+            
+            <!-- Hidden input to store all ingredients as a comma-separated list -->
+            <input type="hidden" name="ingredients" id="ingredientsData">
+
+            {% comment %}
+            <div>
+                <label>Calories</label>
+                <input type="text"></input>
+            </div>
+            <div>
+                <label>Cusine</label>
+                <input type="text"></input>
+            </div>
+            {% endcomment %}
+            <button type="submit">Generate</button>
+        </form>
+
+        <div>
+            <h3>Your Recipes :</h3>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ingredientInput = document.getElementById('ingredientInput');
+            const ingredientList = document.getElementById('ingredientList');
+            const ingredientsData = document.getElementById('ingredientsData');
+            
+            let ingredients = []; // Array to store all entered ingredients
+            
+            ingredientInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent form submission
+                    
+                    const ingredient = ingredientInput.value.trim();
+                    
+                    if (ingredient) {
+                        ingredients.push(ingredient); // Add to ingredients array
+                        updateIngredientList();
+                        ingredientInput.value = ''; // Clear input field
+                    }
+                }
+            });
+            
+            function updateIngredientList() {
+                // Clear existing list items
+                ingredientList.innerHTML = '';
+                
+                // Display each ingredient as a list item
+                ingredients.forEach((ing, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = ing;
+                    
+                    // Add a remove button for each ingredient
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'x';
+                    removeButton.style.marginLeft = '10px';
+                    removeButton.addEventListener('click', () => {
+                        ingredients.splice(index, 1);
+                        updateIngredientList();
+                    });
+                    
+                    li.appendChild(removeButton);
+                    ingredientList.appendChild(li);
+                });
+                
+                // Update hidden input with comma-separated ingredients
+                ingredientsData.value = ingredients.join(',');
+            }
+        });
+    </script>
+</body>
+</html>
