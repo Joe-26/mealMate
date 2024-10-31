@@ -10,7 +10,9 @@ from .models import ingredientDb, recipeDb
 
 from openai import OpenAI
 import os
+import json
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -67,7 +69,8 @@ def home_view(request):
 
 @login_required
 def newmeal_view(request):
-    context = None
+    ai_response = None
+    json_response= None
     if request.method == "POST":
         ingredients_data = request.POST.get('ingredients', '')
         ingredients = ingredients_data.split(',')
@@ -81,7 +84,6 @@ def newmeal_view(request):
         cuisine = request.POST.get('cuisine')
 
         print("Ingredients :", ingredients, " ;Calories :", calories, " ;Cuisine :", cuisine)
-        #context = "Ingredients :"+ ingredients_data+ " ;Calories :"+ calories+ " ;Cuisine :"+ cuisine
         
         client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         completion = client.chat.completions.create(
@@ -90,11 +92,24 @@ def newmeal_view(request):
                 {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
                 {
                     "role": "user",
-                    "content": f"Give me a 3 {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories. Give me a short description, ingredient list, calorie count, and instructions to cook the recipe in a pure json format without any introduction message starting and ending with curly brackets."
+                    "content": f"Give me a 3 {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories. Give me a short description, ingredient list, calorie count, and instructions to cook the recipe strictly in a pure json format without any introduction message starting and ending with curly brackets."
                 }
             ]
         )
-        context = completion.choices[0].message.content
+
+        ai_response = completion.choices[0].message.content
+        print('GPT Response -', ai_response)
+        startIndex, endIndex = 0, 0
+        for i in range(len(ai_response)):
+            if ai_response[i] == '{':
+                startIndex = i
+                break
+                
+        for i in range(len(ai_response)-1, 0, -1):
+            if ai_response[i] == '}':
+                endIndex = i
+                break
+        json_response = json.loads(ai_response[startIndex:endIndex+1])
         
 
-    return render(request, 'newmeal.html', {'context':context})
+    return render(request, 'newmeal.html', {'yourRecipes':json_response})

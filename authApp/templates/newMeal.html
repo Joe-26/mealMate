@@ -40,9 +40,33 @@
         </form>
 
         <div>
-            <h3>Your Recipes :</h3>
-            {% if context %}
-                <div class="recepies">{{ context }} </div>
+            {% if yourRecipes %}
+                <h2>Your Recipes :</h2>
+                {% for recipe in yourRecipes.recipes %}
+                    <div class="recipe">
+                        <h3><u>{{ recipe.name }}</u></h3>
+                        <p><em>{{ recipe.description }}</em></p>
+                        <p><strong>Calories:</strong> {{ recipe.calories }}</p>
+                        
+                        <div class="ingredients">
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                {% for ingredient in recipe.ingredients %}
+                                    <li>{{ ingredient }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="instructions">
+                            <h4>Instructions:</h4>
+                            <ol>
+                                {% for instruction in recipe.instructions %}
+                                    <li>{{ instruction }}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                {% endfor %}
             {% endif %}
         </div>
     </div>
