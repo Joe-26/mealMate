@@ -13,15 +13,19 @@
         <h1>Welcome,&nbsp;{{request.user.username}}!</h1>
         <p>Elevate your home cooking with our AI-powered recipe assistant.</p>
         <div>
-            <h3>Your previous ingredients:</h3>
+            <h3>Previously entered ingredients:</h3>
             {% for ingredient in ingredients %}
-                <p>{{ ingredient.ingredientName }}</p>
+                {% if ingredient.userName.username == request.user.username %}
+                    <p>{{ ingredient.ingredientName }}</p>
+                {% endif %}
             {% endfor %}
         </div>
         <div>
-            <h3>Your previous recipes:</h3>
+            <h3>Previously generated recipes:</h3>
             {% for recipe in recipes %}
-                <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
+                {% if request.user.username == recipe.userName.username%}
+                    <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
+                {% endif %}
             {% endfor %}
         </div>
         <form method="POST" action="{% url "logout" %}">
