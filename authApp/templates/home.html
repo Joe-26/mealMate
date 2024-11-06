@@ -15,31 +15,39 @@
     />
     {% tailwind_css %}
 </head>
-<body>
+<body class="bg-darkgreen p-12 flex justify-center h-screen">
     <div>
-        <h1>Welcome,&nbsp;{{request.user.username}}!</h1>
-        <p>Elevate your home cooking with our AI-powered recipe assistant.</p>
-        <div>
-            <h3>Previously entered ingredients:</h3>
-            {% for ingredient in ingredients %}
-                {% if ingredient.userName.username == request.user.username %}
-                    <p>{{ ingredient.ingredientName }}</p>
-                {% endif %}
-            {% endfor %}
+        <div class="flex items-center justify-between">
+            <h1 class="font-lobster font-medium text-4xl text-orangeskin">Welcome,&nbsp;{{request.user.username}}!</h1>
+            <form method="POST" action="{% url "logout" %}" class="bg-pinkskin rounded-md font-bold px-2 py-1 hover:bg-darkpinkskin">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
         </div>
-        <div>
-            <h3>Previously generated recipes:</h3>
+        
+        
+        <p class="font-imprima text-orangeskin pt-10">Elevate your home cooking with our AI-powered recipe assistant.</p>
+        <div class="pt-5 text-offwhite">
+            <h3 class="font-teko ">Previously entered ingredients:</h3>
+            <div class>
+                {% for ingredient in ingredients %}
+                    {% if ingredient.userName.username == request.user.username %}
+                        <p>{{ ingredient.ingredientName }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pt-5 pb-5 text-offwhite">
+            <h3 class="font-teko">Previously generated recipes:</h3>
             {% for recipe in recipes %}
                 {% if request.user.username == recipe.userName.username%}
                     <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
                 {% endif %}
             {% endfor %}
         </div>
-        <form method="POST" action="{% url "logout" %}">
-            {% csrf_token %}
-            <button type="submit">Log Out</button>
-        </form>
-        <a href={% url "newmeal" %}>
+
+        
+        <a href={% url "newmeal" %} class="bg-pinkskin rounded-md font-bold px-2 py-1 hover:bg-darkpinkskin">
         <button>Make a new meal</button></a>
     </div>
 </body>
