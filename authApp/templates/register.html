@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,23 +6,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Mate</title>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imprima&family=Lobster&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
   </head>
-  <body>
-    <div>
-      <h1>Register</h1>
-    </div>
+  <body class="bg-darkgreen p-12 flex justify-center items-center h-screen">
+    <div class="bg-mddarkgreen rounded-2xl p-6">
+      <!-- Back to Home Link -->
+      <div class="mb-10">
+        <a href="{% url "landingpage" %}" class="bg-pinkskin rounded-full font-bold text-4xl py-1 hover:bg-darkpinkskin">&nbsp;&larr;&nbsp;</a>
+      </div>
 
-    <div>
-      <form method="POST" action={% url "register" %}>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-      </form>
-    </div>
-    
-    <div>
-      <a href="{% url "landingpage" %}">&larr; Back to Home</a>
+      <!-- HEADING -->
+      <div class="font-lobster font-medium text-5xl text-orangeskin">
+        <div>Register</div>
+      </div>
+  
+      <!-- FORM -->
+      <div class="mt-10">
+        <form method="POST" action={% url "register" %} class="flex flex-col gap-4 font-imprima text-offwhite">
+          {% csrf_token %}
+          {{ form.as_div }}
+          <button type="submit" class="bg-pinkskin rounded-xl font-bold font-teko text-darkgreen text-lg py-2 hover:bg-darkpinkskin">Register</button>
+        </form>
+      </div>
+      
+      
     </div>
   </body>
 </html>
