@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,48 +6,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Mate</title>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imprima&family=Lobster&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
 </head>
-<body>
-    <div>
-        <h1>Add New Meal</h1>
-        <p>Cook smarter, not harder.</p>
+<body class="bg-darkgreen p-12 flex justify-center items-center">
+    <div class="bg-mddarkgreen rounded-2xl p-6">
+        <!-- Back to Home Link -->
+        <div class="mb-10">
+            <div><a href={% url "home" %} class="bg-pinkskin rounded-full font-bold text-4xl py-1 hover:bg-darkpinkskin">&nbsp;&larr;&nbsp;</a></div>
+        </div>
 
-        <a href={% url "home" %}>&larr; Home</a>
+        <!-- HEADING -->
+        <h1 class="font-lobster font-medium text-4xl text-orangeskin">Add New Meal</h1>
+        <p class="text-orangeskin font-imprima">Cook smarter, not harder.</p>
         
-        <form method="POST">
-            {% csrf_token %}
-            
-            <div>
-                <label for="ingredientInput">Ingredient</label>
-                <input type="text" id="ingredientInput" placeholder="Ingredient">
-                <ul id="ingredientList"></ul> <!-- List to stack ingredients -->
-            </div>
-            
-            <!-- Hidden input to store all ingredients as a comma-separated list -->
-            <input type="hidden" name="ingredients" id="ingredientsData">
+        <!-- INPUT FORM -->
+        <div class="mt-10">
+            <form method="POST" class="flex flex-col gap-4 font-imprima">
+                {% csrf_token %}
 
-            <div>
-                <label>Calories</label>
-                <input type="number" name="calorieCount"></input>
-            </div>
-            <div>
-                <label>Cusine</label>
-                <input type="text" name="cuisine"></input>
-            </div>
-            
-            <button type="submit">Generate</button>
-        </form>
+                <div class="flex flex-col justify-startitems-center">
+                    <label class="text-offwhite">Cusine</label>
+                    <input type="text" name="cuisine"></input>
+                </div>
 
-        <div>
+                <div class="flex flex-col justify-startitems-center">
+                    <label class="text-offwhite">Calories</label>
+                    <input type="number" name="calorieCount"></input>
+                </div>
+
+                <div class="flex flex-col justify-startitems-center">
+                    <label for="ingredientInput" class="text-offwhite">Ingredient</label>
+                    <input type="text" id="ingredientInput" placeholder="type & hit Enter &#9166;">
+                    <ul id="ingredientList" class="text-offwhite"></ul> <!-- List to stack ingredients -->
+                </div>
+                
+                <!-- Hidden input to store all ingredients as a comma-separated list -->
+                <input type="hidden" name="ingredients" id="ingredientsData">
+
+                <!-- AI Generation Button -->                
+                <button type="submit" class="bg-pinkskin rounded-xl font-bold font-teko text-darkgreen text-lg p-2 hover:bg-darkpinkskin">Generate</button>
+            </form>
+        </div>
+
+        <div class="text-offwhite mt-10">
             {% if yourRecipes %}
-                <h2>Your Recipes :</h2>
+                <h2 class="font-lobster font-medium text-4xl text-orangeskin">Your Recipes :</h2>
                 {% for recipe in yourRecipes.recipes %}
                     <div class="recipe">
-                        <h3><u>{{ recipe.name }}</u></h3>
+                        <br /><br />
+                        <h3 class='font-teko text-3xl'>{{ recipe.name }} &#40;{{ recipe.calories }} cal&#41;</h3>
                         <p><em>{{ recipe.description }}</em></p>
-                        <p><strong>Calories:</strong> {{ recipe.calories }}</p>
                         
+                        <br />
                         <div class="ingredients">
                             <h4>Ingredients:</h4>
                             <ul>
@@ -56,6 +73,7 @@
                             </ul>
                         </div>
 
+                        <br />
                         <div class="instructions">
                             <h4>Instructions:</h4>
                             <ol>
