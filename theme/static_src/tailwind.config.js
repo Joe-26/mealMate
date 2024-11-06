@@ -48,12 +48,14 @@ module.exports = {
             medgreen: '#1d4241',
             orangeskin: '#ffd9be',
             pinkskin: '#ef9c82',
+            darkpinkskin: '#a66b5a',
             offwhite: '#f9eee7',
             
         },
         fontFamily: {
-            "domine":['Domine', 'sans-serif'],
+            "lobster":['lobster, sans-serif'],
             "teko":['Teko, sans-serif'],
+            "imprima":['Imprima', 'sans-serif'],
         },
         extend: {},
     },
