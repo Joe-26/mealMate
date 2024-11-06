@@ -16,20 +16,20 @@
     {% tailwind_css %}
 </head>
 <body class="bg-darkgreen p-12 flex justify-center h-screen">
-    <div>
+    <div class="bg-mddarkgreen rounded-2xl p-6">
         <div class="flex items-center justify-between">
             <h1 class="font-lobster font-medium text-4xl text-orangeskin">Welcome,&nbsp;{{request.user.username}}!</h1>
             <form method="POST" action="{% url "logout" %}" class="bg-pinkskin rounded-md font-bold px-2 py-1 hover:bg-darkpinkskin">
                 {% csrf_token %}
-                <button type="submit">Log Out</button>
+                <button type="submit" class="text-darkgreen">Log Out</button>
             </form>
         </div>
         
         
-        <p class="font-imprima text-orangeskin pt-10">Elevate your home cooking with our AI-powered recipe assistant.</p>
+        <p class="font-imprima text-orangeskin pt-2">Elevate your home cooking with our AI-powered recipe assistant.</p>
         <div class="pt-5 text-offwhite">
             <h3 class="font-teko ">Previously entered ingredients:</h3>
-            <div class>
+            <div class="font-imprima">
                 {% for ingredient in ingredients %}
                     {% if ingredient.userName.username == request.user.username %}
                         <p>{{ ingredient.ingredientName }}</p>
@@ -39,15 +39,17 @@
         </div>
         <div class="pt-5 pb-5 text-offwhite">
             <h3 class="font-teko">Previously generated recipes:</h3>
-            {% for recipe in recipes %}
-                {% if request.user.username == recipe.userName.username%}
-                    <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
-                {% endif %}
-            {% endfor %}
+            <div class="font-imprima">
+                {% for recipe in recipes %}
+                    {% if request.user.username == recipe.userName.username%}
+                        <p>{{ recipe.recipeName }}, {{ recipe.calories }} cal</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
         
-        <a href={% url "newmeal" %} class="bg-pinkskin rounded-md font-bold px-2 py-1 hover:bg-darkpinkskin">
+        <a href={% url "newmeal" %} class="bg-pinkskin rounded-md text-darkgreen font-bold px-4 py-1 hover:bg-darkpinkskin">
         <button>Make a new meal</button></a>
     </div>
 </body>

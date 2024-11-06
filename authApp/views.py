@@ -63,8 +63,8 @@ def logout_view(request):
 # Using the decorator
 @login_required
 def home_view(request):
-    ingredients = ingredientDb.objects.order_by('-ingredientId')[:8]    # Descending order and top 5 rows
-    recipes = recipeDb.objects.order_by('-recipeId')[:8]                # Descending order and top 5 rows
+    ingredients = ingredientDb.objects.order_by('-ingredientId')[:5]    # Descending order and top 5 rows
+    recipes = recipeDb.objects.order_by('-recipeId')[:5]                # Descending order and top 5 rows
     return render(request, 'home.html', {'ingredients':ingredients, 'recipes':recipes})
 
 @login_required

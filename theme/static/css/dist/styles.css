@@ -993,6 +993,11 @@ select {
   padding-bottom: 2.5rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1015,6 +1020,10 @@ select {
 
 .pb-5 {
   padding-bottom: 1.25rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .font-lobster {
@@ -1123,4 +1132,26 @@ select {
 .hover\:text-darkpinkskin:hover {
   --tw-text-opacity: 1;
   color: rgb(166 107 90 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+  .md\:h-auto {
+    height: auto;
+  }
+
+  .md\:h-1 {
+    height: 0.25rem;
+  }
+
+  .md\:h-16 {
+    height: 4rem;
+  }
+
+  .md\:h-9 {
+    height: 2.25rem;
+  }
+
+  .md\:h-96 {
+    height: 24rem;
+  }
 }
