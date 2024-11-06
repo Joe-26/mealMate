@@ -1,37 +1,48 @@
-{% load static %}
-
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Mate</title>
-    <link rel='stylesheet' type="text/css" href=" {% static "styles/styles.css"
-    %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    {% tailwind_css %}
   </head>
-  <body>
+  <body class="bg-darkgreen m-12">
     <div>
-      <h1>Welcome to Meal Mate!</h1>
+      <div class="font-teko font-medium text-8xl text-orangeskin">
+        Welcome to Meal Mate !
+      </div>
     </div>
     <div>
-      <p>
+      <div class="text-offwhite font-domine">
         Ever wondered what to cook with those random ingredients in your fridge?
         We've got you covered. <br />Discover culinary creativity with our
         AI-powered recipe generator. Input your ingredients, calorie goals, and
         preferred cuisine, and watch the magic happen. <br /><br />Customize
         your meals based on dietary needs and taste preferences. Your kitchen,
         your rules.
-      </p>
+      </div>
     </div>
-    <div>
-      <a href="{% url 'login' %}">
-        <button type="submit">Log In</button>
-      </a>
-    </div>
-    <div>
-      <a href="{% url 'register' %}">
-        <button type="submit">Register</button>
-      </a>
+
+    <div class="flex justify-evenly mt-10">
+      <div class="bg-offwhite border-2 rounded-xl px-10 py-2">
+        <a href="{% url 'login' %}">
+          <button type="submit">Log In</button>
+        </a>
+      </div>
+      <div class="bg-offwhite border-2 rounded-xl px-10 py-2">
+        <a href="{% url 'register' %}">
+          <button type="submit">Register</button>
+        </a>
+      </div>
     </div>
   </body>
 </html>
