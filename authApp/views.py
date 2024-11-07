@@ -92,7 +92,7 @@ def newmeal_view(request):
                 {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
                 {
                     "role": "user",
-                    "content": f"Give me a 3 {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories. Give me a short description, ingredient list, calorie count, and instructions to cook the recipe strictly in a pure json format without any introduction message starting and ending with curly brackets."
+                    "content": f"Give me a 3 {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories. Give me a short description, ingredient list, calorie count, and instructions to cook the recipe strictly in a pure valid json format without any introduction message starting and ending with curly brackets. For the 3 recipes, the JSON Keys should be : name, description, ingredients, calories, instructions"
                 }
             ]
         )
@@ -100,19 +100,22 @@ def newmeal_view(request):
         ai_response = completion.choices[0].message.content
         print('GPT Response -', ai_response)
         startIndex, endIndex = 0, 0
-        for i in range(len(ai_response)):
-            if ai_response[i] == '{':
-                startIndex = i
-                break
-                
-        for i in range(len(ai_response)-1, 0, -1):
-            if ai_response[i] == '}':
-                endIndex = i
-                break
-        json_response = json.loads(ai_response[startIndex:endIndex+1])
+        try:
+            for i in range(len(ai_response)):
+                if ai_response[i] == '{':
+                    startIndex = i
+                    break
+                    
+            for i in range(len(ai_response)-1, 0, -1):
+                if ai_response[i] == '}':
+                    endIndex = i
+                    break
+            json_response = json.loads(ai_response[startIndex:endIndex+1])
 
-        for i in range(3):
-            recipeDb.objects.create(recipeName=json_response["recipes"][i]["name"], calories=json_response["recipes"][i]["calories"], userName=request.user)
-        
+            for i in range(3):
+                recipeDb.objects.create(recipeName=json_response["recipes"][i]["name"], calories=json_response["recipes"][i]["calories"], userName=request.user)
+        except:
+            print("An error occured !")      
+            json_response = "Invalid question."  
 
     return render(request, 'newmeal.html', {'yourRecipes':json_response})

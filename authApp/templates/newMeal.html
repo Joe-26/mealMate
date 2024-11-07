@@ -55,7 +55,9 @@
         </div>
 
         <div class="text-offwhite mt-10">
-            {% if yourRecipes %}
+            {% if yourRecipes == "Invalid question." %}
+                <div class="text-offwhite text-2xl">! Sorry, An error occured. Enter details and hit generate again !</div>
+            {% elif yourRecipes %}
                 <h2 class="font-lobster font-medium text-4xl text-orangeskin">Your Recipes :</h2>
                 {% for recipe in yourRecipes.recipes %}
                     <div class="recipe">
