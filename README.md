@@ -1,4 +1,40 @@
-### Steps to Run the Project
+# Project Name: **[Your Django Project Name]**
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Installation Guide](#installation-guide)
+
+
+## Project Overview
+
+**MealMate** is a web application built with Django, designed to generate recipes suggestions using AI, based on food ingredients, calorie limit and cuisine.. This project aims to help those people who have some random ingredients at their home and want to utilize the ingredients to cook something at home. The application is scalable, modular, and follows best practices for Django development.
+
+### Key Features:
+- **User Authentication**: Sign up and login.
+- **RESTful API**: Built with Django REST Framework for easy integration.
+- **Previous History**: Shows previous ingredients & generated recipes.
+- **Responsive Design**: Optimized for desktop and mobile devices.
+
+## Technologies Used
+
+- **Django**: The main web framework for building the project.
+- **OpenAPI**: For generating receipes.
+- **MySQL**: Relational database for data storage.
+- **HTML/CSS/JavaScript**: Frontend for user interface.
+- **Tailwind**: Frontend framework for responsive design.
+- **Git/GitHub**: Version control and collaboration.
+
+## Installation Guide
+
+Follow these steps to get your project up and running locally.
+
+### Prerequisites:
+- Python 3.x
+- pip (Python package installer)
+- Virtual Environment (optional but recommended)
 
 1. Open a terminal & Run the following command to create a new directory named `Test`:
    ```bash
