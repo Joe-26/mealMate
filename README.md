@@ -7,7 +7,7 @@
 1. [Project Overview](#project-overview)
 2. [Features](#key-features)
 3. [Technologies Used](#technologies-used)
-4. [Design Schema] (#design-schema)
+4. [Design Schema](#design-schema)
 5. [Installation Guide](#installation-guide)
 
 
