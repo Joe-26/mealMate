@@ -7,7 +7,8 @@
 1. [Project Overview](#project-overview)
 2. [Features](#key-features)
 3. [Technologies Used](#technologies-used)
-4. [Installation Guide](#installation-guide)
+4. [Design Schema] (#design-schema)
+5. [Installation Guide](#installation-guide)
 
 
 ## Project Overview
@@ -21,7 +22,6 @@
 - **Responsive Design**: Optimized for desktop and mobile devices.
 
 ## Technologies Used
-
 - **Django**: The main web framework for building the project.
 - **OpenAPI**: For generating receipes.
 - **MySQL**: Relational database for data storage.
@@ -29,8 +29,10 @@
 - **Tailwind**: Frontend framework for responsive design.
 - **Git/GitHub**: Version control and collaboration.
 
-## Installation Guide
+## Design Schema
+![AI Recipe Generator drawio](https://github.com/user-attachments/assets/2e900613-e76e-4d8a-96f6-3b7d16c59649)
 
+## Installation Guide
 Follow these steps to get your project up and running locally.
 
 ### Prerequisites:
