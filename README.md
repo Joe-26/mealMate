@@ -1,9 +1,8 @@
-# Project Name: **[Your Django Project Name]**
-
+# Project Name: **MealMate**
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
-2. [Features](#features)
+2. [Features](#key-features)
 3. [Technologies Used](#technologies-used)
 4. [Installation Guide](#installation-guide)
 
