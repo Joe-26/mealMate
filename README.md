@@ -1,4 +1,7 @@
 # Project Name: **MealMate**
+
+<img width="1822" alt="Screenshot 2024-11-07 at 12 35 23 PM" src="https://github.com/user-attachments/assets/c0dd307a-6214-4456-b2c0-4fd811599c9e">
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
