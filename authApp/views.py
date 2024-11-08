@@ -118,4 +118,4 @@ def newmeal_view(request):
             print("An error occured !")      
             json_response = "Invalid question."  
 
-    return render(request, 'newmeal.html', {'yourRecipes':json_response})
+    return render(request, 'newMeal.html', {'yourRecipes':json_response})

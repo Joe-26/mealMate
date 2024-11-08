@@ -30,7 +30,7 @@
       <div class="mt-10">
         <form method="POST" action={% url "register" %} class="flex flex-col gap-4 font-imprima text-offwhite">
           {% csrf_token %}
-          {{ form.as_div }}
+          {{ form.as_p }}
           <button type="submit" class="bg-pinkskin rounded-xl font-bold font-teko text-darkgreen text-lg py-2 hover:bg-darkpinkskin">Register</button>
         </form>
       </div>
